@@ -1,5 +1,5 @@
 # Parking Requirement Database
-*(for database credentials: place database.ini file into repo directory on your machine)*
+*(for [database credentials](https://drive.google.com/file/d/1Lm7Akt0x7dssgo-t79D83HJ5eb1Kokuu/view?usp=sharing): place database.ini file into repo directory on your machine)*
 
 Currently:
  + web-scraping
@@ -23,6 +23,7 @@ Future development:
     - SQLAlchemy 2.0
     - Selenium
     - Beautiful Soup 4
+    - ipykernel
     - lxml
     - html5lib
     - pandas, numpy
@@ -43,6 +44,7 @@ Future development:
    >> '2.0.12'
    ```
 
+
 # Inserting into database
 1. Main function is create_csv_url() in data_processing.py
    ```
@@ -59,3 +61,4 @@ Future development:
    read_database()
    ```
 2. Follow prompts
+

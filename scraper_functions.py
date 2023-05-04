@@ -6,6 +6,7 @@ import pandas as pd
 import time
 
 
+
 def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chromedriver"):
     '''Get the html of a webpage. You need to have a Chrome driver
        installed in order to execute this function.
@@ -51,3 +52,6 @@ def parse_table(html):
         sup.extract()
 
     return soup
+
+
+

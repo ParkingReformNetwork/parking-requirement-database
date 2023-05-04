@@ -1,5 +1,5 @@
 # Parking Requirement Database
-*(for database credentials: place database.ini file into repo directory on your machine)*
+*(for [database credentials](https://drive.google.com/file/d/1Lm7Akt0x7dssgo-t79D83HJ5eb1Kokuu/view?usp=sharing): place database.ini file into repo directory on your machine)*
 
 Currently:
  + web-scraping

@@ -23,6 +23,7 @@ Future development:
     - SQLAlchemy 2.0
     - Selenium
     - Beautiful Soup 4
+    - ipykernel
     - lxml
     - html5lib
     - pandas, numpy

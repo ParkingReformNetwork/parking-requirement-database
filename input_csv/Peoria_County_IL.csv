@@ -1,0 +1,85 @@
+Use,Number of Spaces
+Congregate elderly housing,0.5 per resident + 1 per staff person
+"Dwellings, detached",2 per unit
+"Dwellings, attached",2 per dwelling unit + .5 per bedroom over 2 bedrooms
+Mobile home park,2 per unit + 1 per 2 homes
+"Animal hospitals, boarding and pounds",1 per 300 sq. ft.
+Automobile body repair,1 per employee + 1 per 600 sq. ft.
+Automobile repair,1 per employee + 1 per 600 sq. ft.
+Automobile sales,"1 per 500 sq. ft. of enclosed sales space + 1 per 3,000 sq. ft. of exterior /outdoor  display/sales space + 1.5 for each service bay."
+Automobile service stations,2 per station + 4 per service bay
+Barber/beauty,2 per chair
+Bowling alleys,4 per lane
+"Bus, truck, semi-trailer terminals",1 per 600 sq. ft. of gross floor area
+Cannabis Dispensing Organizations,1 per 200 sq. ft.
+Other Cannabis Business Establishments,"1 per 5,000 sq. ft. for grow and process floor area + 1 per 300 sq. ft. for office  space"
+Car washes,4 stacking spaces per stall + 1 per employee
+Cemeteries,1 per each full time employee + required spaces for offices
+Clinics and medical offices,1 per each employee and doctor + 1 per 200 sq. ft.
+Clubs and lodges,1 per 3 seats of meeting space
+Colleges and universities,1 per classroom + 1 per 3 students
+Commercial retail establishments,1 per 200 sq. ft.
+"Markets, outside",1 per 200 sq. ft. of display area
+Shopping centers,1 per 200 sq. ft. of gross leasable area
+Community centers,1 per 300 sq. ft.
+"Conference center, meeting rooms","1 per 4 seats -OR- 1 per 100 sq. ft. of meeting area, whichever greater"
+Contractors or construction offices,1 per 300 sq. ft.
+Convenience stores,1 per 150 sq. ft.
+Day care centers,1 per 300 sq. ft.
+Day care homes,3 per home
+Drive-through service windows,3 stacking spaces per window
+Dry-cleaning and laundry processing stations,1 per 500 sq. ft.
+Excavating services,1 per employee
+Financial institutions,6 per inside customer service window + 1 per employee
+Food processing plants,1 per employee
+"Fraternities, sororities and dormitories",1 per sleeping room
+Funeral parlors,1 per 200 sq. ft.
+Gas Station Convenience Store,2 per fueling station + 1 per 500 sq. ft. of interior gross floor area
+Golf courses,6 per green + 1 per employee
+Golf driving ranges,1 per tee + 1 per employee
+Administrative offices,1 per 300 sq. ft.
+Fire and police stations,1 per 500 sq. ft.
+"Libraries, art galleries",1 per 200 sq. ft.
+Post offices,2 per station + 4 per service bay
+Ball fields and picnic areas,10 per acre
+Health clubs,1 per employee + 1 per 200 sq. ft. of floor space
+Marinas,1 per employee + 1 per 3 boats
+Swimming pool,1 per 75 sq. ft. of water area
+Tennis or racquet court,3 per court
+Other indoor spaces,1 per 200 sq. ft.
+Other outdoor areas,0.1 per acre
+Hospitals,1 per each 2 hospital beds + 1 per each full-time employee + 1 per doctor
+Laundry (coin-op.),1 per 2 machines
+Light industry and assembly,"2 per 1,000 sq. ft. -OR- 1 per each employee on the largest shift, whichever is greatest"
+Manufacturing,"1.25 per 1,000 sq. ft. -OR- 1 per each 0.75 employee on largest shift, whichever is  greatest"
+"Museums, civic and cultural centers","1 per 1,000 sq. ft."
+"Greenhouses, commercial",1 per 400 sq. ft.
+Nursing homes,0.25 per resident at maximum capacity + 1 per staff person
+"Offices, business",1 per 300 sq. ft.
+"Offices, professional/medical",1 per 200 sq. ft. (minimum of 5 spaces)
+Overnight accommodations,1 per sleeping room + 1 per employee
+Personal service establishments,1 per 200 sq. ft.
+Petroleum storage facilities,1 per employee
+Places of worship,1 per 4 seats in worship assembly hall
+"Printing, publishing or photography est.",1 per 400 sq. ft.
+Private horse stables,1 per each full-time employee + 1 per every 3 horses
+Public utility structures,1 per 2 employees
+Residential-care homes,0.25 per resident + 1 per staff person
+Restaurants-drive in,3 per cashier station + 1 per 100 sq. ft.
+Restaurants and taverns,1 per 100 sq. ft.
+Roadside stands,3 per establishment
+"Sale of building materials and automobile supplies, (e.g., furniture, monuments, tires,  batteries, and accessories)",1 per 600 sq. ft.
+Arts and vocational,2 per classroom + 1 per 2 students
+Boarding,1 per classroom + 1 per employee
+"Elementary, middle or jr. high",1.5 per classroom
+High,1 per classroom + 1 per 5 students
+"Stadia, auditoriums, arenas, and Speedways",Spaces equal in number to 33% of the capacity in persons
+Telecommunication carrier facilities manned on a regular daily basis,1 for each employee regularly at the facility
+Theaters,"1 per 3 seats, or spaces equal in number to 33% of the capacity in persons"
+Truck stops,15 per diesel pump
+Utility substations,1 per employee
+Vehicle body repair,1 per employee + 1 per 600 sq. ft.
+Vehicle mechanical repair,1 per employee + 1 per 600 sq. ft.
+Vehicle sales and rentals,"1 per 500 sq. ft. of enclosed sales or rental area + 1 per 3,000 sq. ft. of outdoor  sales or rental area"
+"Warehouse, Storage, and Wholesale establishments","1 per 1,000 sq. ft."
+Zoo,"1 per 2,000 sq. ft. of lot area"

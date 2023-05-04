@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
 database.ini
+.idea/
+__pycache__/

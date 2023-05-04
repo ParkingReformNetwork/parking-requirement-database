@@ -1,5 +1,5 @@
 # Parking Requirement Database
-(*need to figure out database credentials*)
+*(for database credentials: place database.ini file into repo directory on your machine)*
 
 Currently:
  + web-scraping

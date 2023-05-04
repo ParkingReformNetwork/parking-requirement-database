@@ -9,6 +9,7 @@ def create_csv_url(state, region, url="", table_num=0):
 
     region_file = region.replace(' ', '_')
 
+    # check if csv file exists for the region, state
     if os.path.isfile(rf"input_csv/{region_file}_{state}.csv"):
         print("Opening .csv")
         parking_table = pd.read_csv(rf"input_csv/{region_file}_{state}.csv")
@@ -16,6 +17,7 @@ def create_csv_url(state, region, url="", table_num=0):
     else:
         if url == "":
             raise Exception("No .csv or url")
+
         print("Retrieving HTML...")
         html = get_html(url)
         print("Reading HTML...")
@@ -67,16 +69,5 @@ def remove_extra_header(df):
 def remove_extra_column(df, use, spaces):
     # Remove categories like "Commercial"
     filtered = df[[use, spaces]]
+    filtered = filtered[filtered[use] != filtered[spaces]]
     return filtered
-
-
-def insert_csv():
-    test = pd.read_csv(r'input_csv\Los_Angeles_County_CA.csv')
-    use = "Use.1"
-    spaces = "Number of Spaces"
-    # Remove categories like "Commercial"
-    # filtered = test[test[use] != test[spaces]].dropna(axis=1)
-    filtered = test[[use, spaces]]
-    filtered.columns = ["Use", "Number of Spaces"]
-    print(filtered)
-    # insert_df(filtered)

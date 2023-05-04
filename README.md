@@ -42,3 +42,20 @@ Future development:
     sqlalchemy.__version__
    >> '2.0.12'
    ```
+
+# Inserting into database
+1. Main function is create_csv_url() in data_processing.py
+   ```
+   from data_processing import *
+   create_csv_url("CA", "Los Angeles County", [insert url], [insert table number])   # web-scrape
+   create_csv_url("CA", "Los Angeles County")   # if csv exists
+   ```
+2. Follow prompts
+
+# Reading database
+1. Main function is read_database() in database_functions.py
+   ```
+   from database_functions import *
+   read_database()
+   ```
+2. Follow prompts

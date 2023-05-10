@@ -27,11 +27,15 @@ Future development:
     - lxml
     - html5lib
     - pandas, numpy
+4. Use the following command to update environmental.yml
+   ```
+      conda env export > environment.yml
+   ```
    
 
 # Extra installation step for Jupyter Notebook
 1. Open Anaconda Prompt
-2. Install nb_conda_kernels: allows you to access conda environments in Jupyter Notebook
+2. Install nb_conda_kernels in base environment: allows you to access conda environments in Jupyter Notebook
    (as long as ipykernel is installed)
     ```
    (base) > conda install nb_conda_kernels
@@ -62,4 +66,9 @@ Future development:
    read_database()
    ```
 2. Follow prompts
+
+# Reading pdfs
+1. Main function is read_pdf() in scraper_functions.py
+2. Install Ghostscript via your OS [here](https://camelot-py.readthedocs.io/en/master/user/install-deps.html)
+3. Run function with parameters
 

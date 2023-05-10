@@ -2,6 +2,13 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+# for reading pdfs
+
+import camelot
+# import ghostscript
+import tkinter
+import pandas as pd
+
 import pandas as pd
 import time
 
@@ -48,10 +55,18 @@ def parse_table(html):
 
     # using BeautifulSoup to parse the HTML and find all the tables
     soup = BeautifulSoup(html, "html.parser")
+
+    # remove superscripts in html
     for sup in soup.select('sup'):
         sup.extract()
 
     return soup
 
+
+# read pdfs
+def read_pdf(pdf_file, page_numbers):
+    tables = camelot.read_pdf(pdf_file, pages=",".join(str(x) for x in page_numbers))
+    print("Total tables extracted:", tables.n)
+    print(tables[0].df)
 
 

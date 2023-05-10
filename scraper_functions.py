@@ -67,6 +67,9 @@ def parse_table(html):
 def read_pdf(pdf_file, page_numbers):
     tables = camelot.read_pdf(pdf_file, pages=",".join(str(x) for x in page_numbers))
     print("Total tables extracted:", tables.n)
-    print(tables[0].df)
+    for table in tables:
+        table = table.df.replace('\n', ' ', regex=True)
+        print(table)
+    # print(tables[0].df)
 
 

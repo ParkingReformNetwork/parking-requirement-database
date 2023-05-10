@@ -1,4 +1,4 @@
-name: db_env
+name: db_env_windows
 channels:
   - conda-forge
   - defaults

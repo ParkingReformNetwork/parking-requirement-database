@@ -46,6 +46,7 @@ Future development:
 
 
 # Inserting into database
+0. Download [Chrome driver](https://chromedriver.chromium.org/downloads). Change path of chrome driver in get_html() in scraper_functions.py.
 1. Main function is create_csv_url() in data_processing.py
    ```
    from data_processing import *

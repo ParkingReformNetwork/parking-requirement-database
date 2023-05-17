@@ -3,5 +3,4 @@ database.ini
 .idea/
 __pycache__/
 main.py
-web_crawling/
 .DS_Store

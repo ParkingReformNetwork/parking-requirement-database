@@ -11,27 +11,42 @@ Future development:
  + NLP
  + web-crawling
 
+## For Windows users:
+Due to the use of scrapy-playwright, we recommend installing WSL/Ubuntu to run the scrapy spider.
+
+However, you may want to still have a conda environment on your Windows environment for quick debugging
+and development through your IDE (ex. VSCode, PyCharm, etc)
+
 # Installing conda environment
 1. Open Anaconda Prompt
 2. Create conda environment from environment.yml: has all the necessary libraries and packages
    (including ipykernel)
    ```
-   (base) > conda env create -f environment.yml
+   (base) > conda env create -f environment-[os].yml
    ```
    NOTE: environment.yml will need to be updated if we need to use more packages
 3. Main packages:
     - SQLAlchemy 2.0
+    - Camelot
     - Selenium
     - Beautiful Soup 4
     - ipykernel
     - lxml
     - html5lib
     - pandas, numpy
+    - scrapy
+    - scrapy-playwright
 4. Use the following command to update environmental.yml
    ```
       conda env export > environment.yml
    ```
    
+# Web scraping/crawling
+*(currently trying to migrate from selenium/bs4 into scrapy)*
+1. In the web_crawling folder (has settings.py and a folder called web_crawling)
+   ```commandline
+   scrapy crawl munispider
+   ```
 
 # Extra installation step for Jupyter Notebook
 1. Open Anaconda Prompt
@@ -49,7 +64,7 @@ Future development:
    ```
 
 
-# Inserting into database
+## Inserting into database
 0. Download [Chrome driver](https://chromedriver.chromium.org/downloads). Change path of chrome driver in get_html() in scraper_functions.py.
 1. Main function is create_csv_url() in data_processing.py
    ```
@@ -59,7 +74,7 @@ Future development:
    ```
 2. Follow prompts
 
-# Reading database
+## Reading database
 1. Main function is read_database() in database_functions.py
    ```
    from database_functions import *
@@ -67,7 +82,7 @@ Future development:
    ```
 2. Follow prompts
 
-# Reading pdfs
+## Reading pdfs
 1. Main function is read_pdf() in scraper_functions.py
 2. Install Ghostscript via your OS [here](https://camelot-py.readthedocs.io/en/master/user/install-deps.html)
 3. Run function with parameters

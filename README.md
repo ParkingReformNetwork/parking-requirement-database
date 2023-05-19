@@ -12,10 +12,16 @@ Future development:
  + web-crawling
 
 ## For Windows users:
-Due to the use of scrapy-playwright, we recommend installing WSL/Ubuntu to run the scrapy spider.
+Due to the use of scrapy-playwright (loading js elements when using scrapy), we recommend installing WSL/Ubuntu to run the scrapy spider. 
 
 However, you may want to still have a conda environment on your Windows environment for quick debugging
-and development through your IDE (ex. VSCode, PyCharm, etc)
+and development through your IDE (ex. VSCode, PyCharm, etc).
+
+Other utilities to consider include [this](https://superuser.com/questions/1262977/open-browser-in-host-system-from-windows-subsystem-for-linux) for commands like view(response) in scrapy shell. 
+
+There may be more dependencies to install including:
+- playwright install-deps
+- etc
 
 # Installing conda environment
 1. Open Anaconda Prompt
@@ -64,7 +70,7 @@ and development through your IDE (ex. VSCode, PyCharm, etc)
    ```
 
 
-## Inserting into database
+### Inserting into database
 0. Download [Chrome driver](https://chromedriver.chromium.org/downloads). Change path of chrome driver in get_html() in scraper_functions.py.
 1. Main function is create_csv_url() in data_processing.py
    ```
@@ -74,7 +80,7 @@ and development through your IDE (ex. VSCode, PyCharm, etc)
    ```
 2. Follow prompts
 
-## Reading database
+### Reading database
 1. Main function is read_database() in database_functions.py
    ```
    from database_functions import *
@@ -82,7 +88,7 @@ and development through your IDE (ex. VSCode, PyCharm, etc)
    ```
 2. Follow prompts
 
-## Reading pdfs
+### Reading pdfs
 1. Main function is read_pdf() in scraper_functions.py
 2. Install Ghostscript via your OS [here](https://camelot-py.readthedocs.io/en/master/user/install-deps.html)
 3. Run function with parameters

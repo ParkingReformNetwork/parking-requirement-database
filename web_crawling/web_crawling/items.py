@@ -6,8 +6,16 @@
 import scrapy
 
 
-class MuniItem(scrapy.Item):
+class StateItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     name = scrapy.Field()
+    url = scrapy.Field()
     pass
+
+
+class MuniItem(scrapy.Item):
+    state = scrapy.Field()
+    muni = scrapy.Field()
+    url = scrapy.Field()
+

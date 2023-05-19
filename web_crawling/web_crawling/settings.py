@@ -99,3 +99,7 @@ DOWNLOAD_HANDLERS = {
 }
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+
+FEEDS = {
+    'general_data.json': {'format': 'json'}
+}

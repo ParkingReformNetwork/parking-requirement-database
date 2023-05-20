@@ -11,7 +11,9 @@ class MunispiderSpider(scrapy.Spider):
     start_url = ['https://library.municode.com']
     custom_settings = {
         'FEEDS': {
-            'municipalities.json': {'format': 'json'}
+            'municipalities.json': {
+                'format': 'json',
+                'overwrite': True}
         }
     }
 
@@ -36,7 +38,8 @@ class MunispiderSpider(scrapy.Spider):
             yield scrapy.Request(relative_url, callback=self.parse_muni_page,
                                  meta=dict(playwright=True,
                                            playwright_include_page=True,
-                                           playwright_page_methods=[PageMethod('wait_for_selector', 'h3.text-divider')],
+                                           playwright_page_methods=
+                                           [PageMethod('wait_for_selector', 'div.navbar-search')],  # wait for nav bar
                                            errback=self.errback,
                                            ))      # follows embedded link
 

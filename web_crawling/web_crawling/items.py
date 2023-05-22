@@ -6,12 +6,18 @@
 import scrapy
 
 
+class ParkingCodeItem(scrapy.Item):
+    state = scrapy.Field()
+    municipal = scrapy.Field()
+    state_url = scrapy.Field()
+    parking_code = scrapy.Field()
+
+
 class StateItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     name = scrapy.Field()
     url = scrapy.Field()
-    pass
 
 
 class MuniItem(scrapy.Item):

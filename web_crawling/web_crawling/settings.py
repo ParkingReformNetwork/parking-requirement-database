@@ -100,6 +100,15 @@ DOWNLOAD_HANDLERS = {
 
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 
+
+"""def should_abort_request(request):
+    return (
+        request.resource_type == "image" in request.url
+    )"""
+
+
+# PLAYWRIGHT_ABORT_REQUEST = should_abort_request
+
 FEEDS = {
     'general_data.json': {'format': 'json'}
 }

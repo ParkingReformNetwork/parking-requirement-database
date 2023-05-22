@@ -1,6 +1,7 @@
 # spiders/quotes.py
 
 import scrapy
+import os
 from ..items import StateItem, MuniItem
 from scrapy_playwright.page import PageMethod
 
@@ -9,9 +10,11 @@ class MunispiderSpider(scrapy.Spider):
     name = 'munispider'
     allowed_domains = ['library.municode.com']
     start_url = ['https://library.municode.com']
+
+    muni_dir = os.path.join('jsons', 'municipalities.json')
     custom_settings = {
         'FEEDS': {
-            'municipalities.json': {
+            muni_dir: {
                 'format': 'json',
                 'overwrite': True}
         }

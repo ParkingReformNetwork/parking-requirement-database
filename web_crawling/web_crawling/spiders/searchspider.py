@@ -64,7 +64,7 @@ class SearchspiderSpider(scrapy.Spider):
 
         parking_code = ParkingCodeItem()
         parking_code['state'] = state
-        parking_code['municipal'] = muni
+        parking_code['municipality'] = muni
         parking_code['state_url'] = url
         parking_code['parking_code'] = parking_url
         yield parking_code

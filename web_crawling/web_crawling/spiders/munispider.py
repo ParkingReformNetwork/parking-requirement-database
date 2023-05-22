@@ -55,7 +55,7 @@ class MunispiderSpider(scrapy.Spider):
         for m in response.xpath('//ul[@class = "nav row"]/child::li/a'):  # navigates to each municipality
             muni_item = MuniItem()
             muni_item['state'] = state  # gets state
-            muni_item['muni'] = m.xpath('text()').get()  # gets municipality
+            muni_item['municipality'] = m.xpath('text()').get()  # gets municipality
             muni_item['url'] = m.xpath('@href').get()  # gets embedded link
             yield muni_item
 

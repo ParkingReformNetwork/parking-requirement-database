@@ -36,7 +36,7 @@ class StatespiderSpider(scrapy.Spider):
 
         for s in response.xpath('//ul[@class = "nav row"]/child::li/a'):
             state_item = StateItem()
-            state_item['name'] = s.xpath('text()').get()
+            state_item['state'] = s.xpath('text()').get()
 
             state_item['url'] = s.xpath('@href').get()
             yield state_item

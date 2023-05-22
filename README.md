@@ -1,15 +1,17 @@
 # Parking Requirement Database
 *(for [database credentials](https://drive.google.com/file/d/1Lm7Akt0x7dssgo-t79D83HJ5eb1Kokuu/view?usp=sharing): place database.ini file into repo directory on your machine)*
 
-Currently:
- + web-scraping
+Current development:
+ + web scraping/crawling
  + ORM database management
  + PostgreSQL database
  + currently hosted by Supabase
+ + [Wiki documentation](https://github.com/ParkingReformNetwork/parking-requirement-database/wiki)
 
 Future development:
  + NLP
- + web-crawling
+ + Website
+ + Aggregation and other data analysis
 
 ## For Windows users:
 Due to the use of scrapy-playwright (loading js elements when using scrapy), we recommend installing WSL/Ubuntu to run the scrapy spider. 
@@ -53,6 +55,7 @@ There may be more dependencies to install including:
    ```commandline
    scrapy crawl munispider
    ```
+2. Check out the [wiki](https://github.com/ParkingReformNetwork/parking-requirement-database/wiki) for updated information
 
 # Extra installation step for Jupyter Notebook
 1. Open Anaconda Prompt

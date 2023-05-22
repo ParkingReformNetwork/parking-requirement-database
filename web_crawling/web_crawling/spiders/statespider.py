@@ -1,6 +1,7 @@
 # spiders/quotes.py
 
 import scrapy
+import os
 from ..items import StateItem
 from scrapy_playwright.page import PageMethod
 
@@ -10,9 +11,12 @@ class StatespiderSpider(scrapy.Spider):
     allowed_domains = ['library.municode.com']
     start_url = ['https://library.municode.com']
 
+    state_dir = os.path.join('jsons', 'states.json')
     custom_settings = {
         'FEEDS': {
-            'states.json': {'format': 'json'}
+            state_dir: {
+                'format': 'json',
+                'overwrite': True}
         }
     }
 

@@ -94,7 +94,7 @@ def insert_df(df, state, region):
 
 def test_connection():
     print("Testing connection to database.")
-    url_object = URL.create(**config(section='postgresql+psycopg2'))
+    url_object = URL.create(**config())
 
     engine = create_engine(url_object, pool_pre_ping=True, pool_recycle=3600)
     print(f"Database Connection Info: {url_object}")
@@ -104,24 +104,6 @@ def test_connection():
         statement = select(func.count()).select_from(table('requirements', column('use')))
         query = session.scalars(statement).all()
         print(query)
-
-
-def test_pool_connection():
-    print("Testing pool connection to database.")
-
-    c = psycopg2.connect(user='postgres', host='db.ivzidqccueblykefgvbg.supabase.co', dbname='postgres')
-
-    my_pool = pool.QueuePool(c, max_overflow=10, pool_size=5)
-    print(f"Database Connection Info: {c}")
-
-    conn = my_pool.connect()
-    cursor_obj = conn.cursor()
-    print("Attempting querying database.")
-    statement = select(func.count()).select_from(table('requirements', column('use')))
-    query = cursor_obj.scalars(statement).all()
-    print(query)
-
-    conn.close()
 
 
 def read_database():

@@ -28,6 +28,23 @@ def create_csv_url(state, region, url="", table_num=0):
         parking_table = tables[table_num]
         parking_table.to_csv(rf'input_csv\{region_file}_{state}.csv', index=False)
 
+    processing_interface(parking_table, region_file, region, state)
+
+
+def create_csv_pdf(state, region, pages):
+    region_file = region.replace(' ', '_')
+
+    # check if csv file exists for the region, state
+    if os.path.isfile(rf"input_csv/{region_file}_{state}.csv"):
+        print("Opening .csv")
+        parking_table = pd.read_csv(rf"input_csv/{region_file}_{state}.csv")
+
+    else:
+        parking_table = read_pdf(f'{region}_{state}.pdf', pages)
+    processing_interface(parking_table, region_file, region, state)
+
+
+def processing_interface(parking_table, region_file, region, state):
     user = ""
     while user != "insert":
         print(f"{parking_table}\nn: {parking_table.shape}\nColumn names: {parking_table.columns}\n")
@@ -47,13 +64,18 @@ def create_csv_url(state, region, url="", table_num=0):
         elif user == "2":
             use = input("Enter column name to keep for...\nUse: ")
             spaces = input("Number of Spaces: ")
-            parking_table = parking_table[[use, spaces]]
+            # returns only use and spaces columns, replaces empty string with NaN, removes any rows with NaN
+            parking_table = parking_table[[use, spaces]].replace(r'^s*$', float('NaN'), regex=True).dropna(axis=0)
+
+            # removes rows that have the same name as headers
+            parking_table = parking_table[parking_table[use] != use]
+            parking_table = parking_table[parking_table[spaces] != spaces]
         elif user == "3":
             parking_table.columns = ["Use", "Number of Spaces"]
         elif user == "4":
             parking_table = parking_table.drop_duplicates(subset="Use")
         elif user == "5":
-            parking_table.to_csv(rf'input_csv\{region_file}_{state}.csv', index=False)
+            parking_table.to_csv(os.path.join('input_csv', f'{region_file}_{state}.csv'), index=False)
         elif user == "exit":
             sys.exit("Exiting program.")
 
@@ -69,5 +91,6 @@ def remove_extra_header(df):
 def remove_extra_column(df, use, spaces):
     # Remove categories like "Commercial"
     filtered = df[[use, spaces]]
-    filtered = filtered[filtered[use] != filtered[spaces]]
+    filtered = filtered.dropna()
+
     return filtered

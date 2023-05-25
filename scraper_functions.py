@@ -11,6 +11,7 @@ import pandas as pd
 
 import pandas as pd
 import time
+import os
 
 
 
@@ -65,11 +66,16 @@ def parse_table(html):
 
 # read pdfs
 def read_pdf(pdf_file, page_numbers):
-    tables = camelot.read_pdf(pdf_file, pages=",".join(str(x) for x in page_numbers))
+    tables = camelot.read_pdf(os.path.join('pdfs', pdf_file), pages=",".join(str(x) for x in page_numbers))
     print("Total tables extracted:", tables.n)
+    all_tables = pd.DataFrame()
     for table in tables:
         table = table.df.replace('\n', ' ', regex=True)
-        print(table)
-    # print(tables[0].df)
+        all_tables = pd.concat([all_tables, table])
 
+    # all_tables = pd.concat([table.df for table in tables])
+    all_tables.columns = all_tables.iloc[0]
+    all_tables = all_tables[1:]
 
+    print(f'{all_tables}\n\n\n')
+    return all_tables

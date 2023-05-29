@@ -79,3 +79,36 @@ def read_pdf(pdf_file, page_numbers):
 
     print(f'{all_tables}\n\n\n')
     return all_tables
+
+
+def url_text_to_table(url, section_name, separator):
+    '''Parse the html to and find all the bullet point parking requiremnets
+    Args:
+        url: url of the webpage
+        section_name: the section name that contains the bullet point requirements
+        separator: separator of use and parking 
+    Return:
+        pandas DataFrame
+    '''
+    html = get_html(url)
+    soup = BeautifulSoup(html, "html.parser")
+    title = soup.find("div", text = section_name)
+    section = title.find_parent("li")
+    
+    # finding the smallest content
+    raw_contents = section.find_all('p', class_ = lambda value: value and value.startswith("content"))
+    uniq_names = set(' '.join(content['class']) for content in raw_contents)
+    uniq_ints = []
+    for name in uniq_names:
+        uniq_ints.append(int(name[-1]))
+    wanted_class = f"content{max(uniq_ints)}"
+    wanted_contents = section.find_all('p', class_ = wanted_class)
+    requirement_dicts = []
+    for requirement in wanted_contents:
+        # need to find a way to separate properly
+        # might run into the problem of "Single-family dwelling—Two spaces."
+        info = requirement.text.replace("\n", "").split(separator,1)
+        requirement_dicts.append({"Use": info[0], 
+                                  "Number of Spaces": info[1]})
+    
+    return pd.DataFrame(requirement_dicts)

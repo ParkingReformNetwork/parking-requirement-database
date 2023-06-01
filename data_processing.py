@@ -28,40 +28,50 @@ def start_interface():
     region = input("Enter region: ")
 
     parking_table = []
-    filename = region.replace(' ', '_')+"_"+state
+    filename = f"{region.replace(' ', '_')}_{state}"
+
     # check if csv file exists for the region, state
-    if os.path.isfile(os.path.join('input_csv', f'{filename}.csv')):
+    csv_path = os.path.isfile(os.path.join('input_csv', f'{filename}.csv'))
+    if csv_path:
         print("Opening .csv")
-        parking_table = pd.read_csv(rf"input_csv/{filename}.csv")
+        parking_table = pd.read_csv(csv_path)
         print(f"Found {filename}.csv")
         if input("Take a look? [y/n]\n>> ") == "y":
             print(parking_table)
 
         if input("Use this table? [y/n]\n>> ") == "n":
             parking_table = []
-    if os.path.isfile(os.path.join('pdfs', f'{filename}.pdf')):
+
+    # check if pdf exists for the region, state
+    pdf_path = os.path.isfile(os.path.join('pdfs', f'{filename}.pdf'))
+    if pdf_path:
         print(f"Found {filename}.pdf")
         user_pages = input("Which pages are the tables located in? (separate by commas no space)\nPages: ")
 
-        parking_table = read_pdf(f'{region}_{state}.pdf', user_pages.split(','))
+        parking_table = read_pdf(pdf_path, user_pages.split(','))
 
         if input("Take a look? [y/n]\n>> ") == "y":
             print(parking_table)
     else:
         print("\nNo pdf found in files.")
 
+    # if csv or pdf doesn't find parking table, run web scraping
     if len(parking_table) == 0:
         print("\n\n[Scrape from site]")
         url = input("Url to scrape: ")
+
         print("Retrieving HTML...")
         html = get_html(url)
         print("Reading HTML...")
         html_tables = str(parse_table(html)).encode('UTF-8')
+
         # using read_html to remove superscripts
         tables = pd.read_html(html_tables)  # require lxml & html5lib
+
         for i, t in enumerate(tables):
             print(f"{i}: {t.columns}")
         table_num = int(input("Which table has the parking requirement? "))
+
         parking_table = tables[table_num]
 
     print(f"{parking_table}\nn: {parking_table.shape}\nColumn/Header names: {parking_table.columns}\n")
@@ -99,7 +109,7 @@ def process_automatic(parking_table, filename, region, state):
     Returns: None
 
     """
-    parking_table = rename_headers(parking_table)
+    parking_table = rename_headers_to_index(parking_table)
     use, spaces = "0", "1"
     parking_table = parking_table[[use, spaces]].replace(r'^s*$', float('NaN'), regex=True).dropna(axis=0)
 
@@ -147,7 +157,7 @@ def processing_interface_manual(parking_table, filename, region, state):
         print(f"{parking_table}\nn: {parking_table.shape}\nColumn/Header names: {parking_table.columns}\n")
         user = input(
             """Processing steps:
-                1. Rename headers
+                1. Rename headers to their indexes
                 2. Remove extra columns and removes categories (also renames columns)
                 3. Remove duplicates (human error in the parking tables)
                 4. Save as .csv
@@ -156,7 +166,7 @@ def processing_interface_manual(parking_table, filename, region, state):
                 >> """)
 
         if user == "1":
-            parking_table = rename_headers(parking_table)
+            parking_table = rename_headers_to_index(parking_table)
         elif user == "2":
             use = input("Enter column name to keep for...\nUse: ")
             spaces = input("Number of Spaces: ")
@@ -178,7 +188,7 @@ def processing_interface_manual(parking_table, filename, region, state):
     insert_df(parking_table, state, region)
 
 
-def rename_headers(df):
+def rename_headers_to_index(df):
     """Renames DataFrame headers to its index
 
     Args:

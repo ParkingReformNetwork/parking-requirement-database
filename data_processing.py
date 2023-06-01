@@ -27,16 +27,17 @@ def start_interface():
     state = input("Enter state (ex. NY, CA): ")
     region = input("Enter region: ")
 
+    parking_table = []
     filename = region.replace(' ', '_')+"_"+state
     # check if csv file exists for the region, state
     if os.path.isfile(os.path.join('input_csv', f'{filename}.csv')):
         print("Opening .csv")
         parking_table = pd.read_csv(rf"input_csv/{filename}.csv")
         print(f"Found {filename}.csv")
-        if input("Take a look? [y/n]\n>>") == "y":
+        if input("Take a look? [y/n]\n>> ") == "y":
             print(parking_table)
 
-        if input("Use this table? [y/n]\n>>") == "n":
+        if input("Use this table? [y/n]\n>> ") == "n":
             parking_table = []
     if os.path.isfile(os.path.join('pdfs', f'{filename}.pdf')):
         print(f"Found {filename}.pdf")
@@ -44,23 +45,24 @@ def start_interface():
 
         parking_table = read_pdf(f'{region}_{state}.pdf', user_pages.split(','))
 
-        if input("Take a look? [y/n]\n>>") == "y":
+        if input("Take a look? [y/n]\n>> ") == "y":
             print(parking_table)
     else:
         print("\nNo pdf found in files.")
 
-    print("\n\n[Scrape from site]")
-    url = input("Url to scrape: ")
-    print("Retrieving HTML...")
-    html = get_html(url)
-    print("Reading HTML...")
-    html_tables = str(parse_table(html)).encode('UTF-8')
-    # using read_html to remove superscripts
-    tables = pd.read_html(html_tables)  # require lxml & html5lib
-    for i, t in enumerate(tables):
-        print(f"{i}: {t.columns}")
-    table_num = int(input("Which table has the parking requirement? "))
-    parking_table = tables[table_num]
+    if len(parking_table) == 0:
+        print("\n\n[Scrape from site]")
+        url = input("Url to scrape: ")
+        print("Retrieving HTML...")
+        html = get_html(url)
+        print("Reading HTML...")
+        html_tables = str(parse_table(html)).encode('UTF-8')
+        # using read_html to remove superscripts
+        tables = pd.read_html(html_tables)  # require lxml & html5lib
+        for i, t in enumerate(tables):
+            print(f"{i}: {t.columns}")
+        table_num = int(input("Which table has the parking requirement? "))
+        parking_table = tables[table_num]
 
     print(f"{parking_table}\nn: {parking_table.shape}\nColumn/Header names: {parking_table.columns}\n")
 

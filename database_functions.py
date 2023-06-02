@@ -22,12 +22,17 @@ from datetime import date
 from tabulate import tabulate
 
 
-# Declare ORM Model for each table
 class Base(DeclarativeBase):
+    """
+    Must declare a Base class to use SQLAlchemy's DeclarativeBase
+    """
     pass
 
 
 class Requirement(Base):
+    """
+    SQLAlchemy's ORM Model for the table called requirements
+    """
     __tablename__ = "requirements"
 
     state: Mapped[str] = mapped_column(String(30), primary_key=True)
@@ -50,7 +55,9 @@ class Requirement(Base):
         yield self.region
         yield self.use
         yield self.raw
-"""
+
+
+""" TO BE FULLY IMPLEMENTED
 class Region_Info(Base):
     __tablename__ = "region_info"
 
@@ -63,22 +70,35 @@ class Region_Info(Base):
         return f"Region_Info(state={self.state}, region={self.region}, date={self.date}, url={self.url})"
 """
 
-# add = Requirement(state="CA", region="Los Angeles County", use="Bowling alleys", raw="3 spaces per bowling alley.")
 
+def insert_df_raw(df, state, region):
+    """Inserts (x, 4) dataframe into requirements table
+    The 4 columns are state, region, use, and raw.
 
-def insert_df(df, state, region):
+    Args:
+        df: DataFrame a region's parking requirements
+        state: str
+        region: str
+
+    Returns: None
+
+    """
     object_list = []
+    # convert dataframe into a list of Requirement objects
     for row in df.values.tolist():
         object_list.append(Requirement(state=state, region=region, use=row[0], raw=row[1]))
 
+    # print all Requirement objects to check if you want to continue with insertion
     for i in object_list:
         print(repr(i))
 
     input("Press Enter to continue with insertion into database.")
 
+    # setup credentials to connect to database
     url_object = URL.create(**config())
     engine = create_engine(url_object)
 
+    # open connection session and insert
     with Session(engine) as session:
         print("Connecting to database...")
         session.add_all(object_list)
@@ -93,6 +113,11 @@ def insert_df(df, state, region):
 
 
 def test_connection():
+    """Test database credentials and connection
+
+    Returns: None
+
+    """
     print("Testing connection to database.")
     url_object = URL.create(**config())
 
@@ -107,6 +132,13 @@ def test_connection():
 
 
 def read_database():
+    """Read interface with requirements table
+    Options include, show all entries, filter by state or region, show total number of entries
+    (command-line option to Supabase project access)
+
+    Returns: None
+
+    """
     print("Connecting to database...")
     url_object = URL.create(**config())
     engine = create_engine(url_object)
@@ -117,7 +149,7 @@ def read_database():
             Enter number for command:
                 (1) Show all
                 (2) Filter
-                (3) Count
+                (3) Total number of entries
                 (4) Exit
                 >>> """)
             if user == "1":
@@ -165,7 +197,7 @@ def read_database():
                 print(f"Total number of entries: {query}")
 
 
-"""
+""" TO BE FULLY IMPLEMENTED
 def insert_region(state, region, url):
     url_object = URL.create(**config())
     # print(url_object)

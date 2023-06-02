@@ -1,5 +1,5 @@
-from database_functions import *
-from scraper_functions import *
+from database_functions import insert_df_raw
+from scraper_functions import parse_table, get_html, read_pdf
 import pandas as pd
 import os
 import sys
@@ -125,7 +125,7 @@ def process_automatic(parking_table, filename, region, state):
         parking_table.to_csv(os.path.join('input_csv', f'{filename}.csv'), index=False)
 
         if input("Insert into database? [y/n]\n>>") == "y":
-            insert_df(parking_table, state, region)
+            insert_df_raw(parking_table, state, region)
         else:
             sys.exit("Exiting program.")
     else:
@@ -185,7 +185,7 @@ def processing_interface_manual(parking_table, filename, region, state):
         elif user == "exit":
             sys.exit("Exiting program.")
 
-    insert_df(parking_table, state, region)
+    insert_df_raw(parking_table, state, region)
 
 
 def rename_headers_to_index(df):

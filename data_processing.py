@@ -1,5 +1,5 @@
-from database_functions import *
-from scraper_functions import *
+from database_functions import insert_df_raw
+from scraper_functions import parse_table, get_html, read_pdf
 import pandas as pd
 import os
 import sys
@@ -79,7 +79,7 @@ def processing_interface(parking_table, region_file, region, state):
         elif user == "exit":
             sys.exit("Exiting program.")
 
-    insert_df(parking_table, state, region)
+    insert_df_raw(parking_table, state, region)
 
 
 def remove_extra_header(df):

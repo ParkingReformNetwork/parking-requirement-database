@@ -2,11 +2,15 @@
 
 import scrapy
 import os
-from ..items import StateItem, MuniItem
+from ..items import MuniItem
 from scrapy_playwright.page import PageMethod
 
 
 class MunispiderSpider(scrapy.Spider):
+    """
+    Crawls through home page of municode for URL links for every municipality
+    Includes following links into every state, and then every municipality
+    """
     name = 'munispider'
     allowed_domains = ['library.municode.com']
     start_url = ['https://library.municode.com']
@@ -21,7 +25,13 @@ class MunispiderSpider(scrapy.Spider):
     }
 
     def start_requests(self):
+        """
+        Requests for Municode's home page. Response is sent to parse_state.
+        """
         url = "https://library.municode.com"
+
+        # waits for page to load a specific header
+        # this can be changed into wait for a certain amount of time
         yield scrapy.Request(url, callback=self.parse_state,
                              meta=dict(
                                  playwright=True,
@@ -31,7 +41,9 @@ class MunispiderSpider(scrapy.Spider):
                              ))
 
     async def parse_state(self, response):
-        print("\n\n\nIn parse:")
+        """
+        Follows link into each state. Response is sent to parse_muni_page.
+        """
         page = response.meta["playwright_page"]
         await page.close()
 
@@ -47,6 +59,10 @@ class MunispiderSpider(scrapy.Spider):
                                            ))      # follows embedded link
 
     async def parse_muni_page(self, response):
+        """
+        Scrapes each municipality URL in the state site. Inserts into a scrapy item.
+        Should be called x times for x states.
+        """
         print("\n\n\nIn parse_muni_page:")
         page = response.meta["playwright_page"]
         await page.close()
@@ -60,6 +76,9 @@ class MunispiderSpider(scrapy.Spider):
             yield muni_item
 
     async def errback(self, failure):
+        """
+        To be implemented fully
+        """
         page = failure.request.meta["playwright_page"]
         await page.close()
 

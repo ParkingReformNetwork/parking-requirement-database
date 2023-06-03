@@ -3,6 +3,14 @@ from configparser import ConfigParser
 
 
 def config(filename='database.ini', section='postgresql'):
+    """ Parses database credentials from file
+    Args:
+        filename: str filename of database credentials
+        section: str for selecting section (section name is in square brackets in filename)
+
+    Returns:
+        db: dictionary of credentials
+    """
     # create a parser
     parser = ConfigParser()
     # read config file

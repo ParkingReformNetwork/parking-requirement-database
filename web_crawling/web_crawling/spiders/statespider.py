@@ -1,4 +1,8 @@
-# spiders/quotes.py
+# spiders/statespider.py
+
+# This spider will most likely not be used in the final pipeline
+# However, this is a good place to start understanding how our spiders work.
+
 
 import scrapy
 import os
@@ -7,6 +11,9 @@ from scrapy_playwright.page import PageMethod
 
 
 class StatespiderSpider(scrapy.Spider):
+    """
+    Scrapes names and URLs of every state on Municode
+    """
     name = 'statespider'
     allowed_domains = ['library.municode.com']
     start_url = ['https://library.municode.com']
@@ -21,6 +28,9 @@ class StatespiderSpider(scrapy.Spider):
     }
 
     def start_requests(self):
+        """
+        Starts with request to Municode's main page. Response is sent to parse_state.
+        """
         url = "https://library.municode.com"
         yield scrapy.Request(url, callback=self.parse_state, meta=dict(
             playwright=True,
@@ -30,7 +40,9 @@ class StatespiderSpider(scrapy.Spider):
         ))
 
     async def parse_state(self, response):
-        print("\n\n\nIn parse:")
+        """
+        Scrapes state and its URL
+        """
         page = response.meta["playwright_page"]
         await page.close()
 

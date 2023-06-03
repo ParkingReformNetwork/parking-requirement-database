@@ -3,20 +3,17 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 # for reading pdfs
-
 import camelot
 # import ghostscript
 import tkinter
 import pandas as pd
 
-import pandas as pd
 import time
 import os
 
 
-
 def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chromedriver"):
-    '''Get the html of a webpage. You need to have a Chrome driver
+    """Get the html of a webpage. You need to have a Chrome driver
        installed in order to execute this function.
 
     Args:
@@ -25,7 +22,7 @@ def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chro
 
     Return:
         html: HTML of the rendered website (str)
-    '''
+    """
 
     # Create a headless webdriver instance and interact with the website
     options = Options()
@@ -46,13 +43,14 @@ def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chro
 
 
 def parse_table(html):
-    '''Parse the HTML to extract tables.
+    """Parse the HTML to extract tables.
+    HTML processing occurs here including: removing superscripts
 
     Arg:
         html: HTML of the rendered website (str)
     Return:
         tables: a list of parsed table HTML (list)
-    '''
+    """
 
     # using BeautifulSoup to parse the HTML and find all the tables
     soup = BeautifulSoup(html, "html.parser")
@@ -73,11 +71,9 @@ def read_pdf(pdf_file, page_numbers):
         table = table.df.replace('\n', ' ', regex=True)
         all_tables = pd.concat([all_tables, table])
 
-    # all_tables = pd.concat([table.df for table in tables])
     all_tables.columns = all_tables.iloc[0]
     all_tables = all_tables[1:]
 
-    print(f'{all_tables}\n\n\n')
     return all_tables
 
 

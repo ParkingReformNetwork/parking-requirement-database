@@ -77,12 +77,13 @@ def read_pdf(pdf_file, page_numbers):
     return all_tables
 
 
-def url_text_to_table(url, section_name, separator):
-    '''Parse the html to and find all the bullet point parking requiremnets
+def url_bullet_to_table(url, section_name, separator):
+    '''Parse the html to find all the bullet point parking requiremnets
     Args:
         url: url of the webpage
         section_name: the section name that contains the bullet point requirements
-        separator: separator of use and parking 
+        separator: a separator, usually ":" or ".", that divides the sentence into 
+                   "Use" and "Parking Requirement" 
     Return:
         pandas DataFrame
     '''
@@ -91,15 +92,17 @@ def url_text_to_table(url, section_name, separator):
     title = soup.find("div", text = section_name)
     section = title.find_parent("li")
     
-    # finding the smallest content
+    # finding the "content" class with the biggest number at the end
     raw_contents = section.find_all('p', class_ = lambda value: value and value.startswith("content"))
-    uniq_names = set(' '.join(content['class']) for content in raw_contents)
-    uniq_ints = []
-    for name in uniq_names:
-        uniq_ints.append(int(name[-1]))
-    wanted_class = f"content{max(uniq_ints)}"
+    content_names = set(' '.join(content['class']) for content in raw_contents)
+    content_nums = []
+    for name in content_names:
+        content_nums.append(int(name[-1]))
+    wanted_class = f"content{max(content_nums)}"
     wanted_contents = section.find_all('p', class_ = wanted_class)
     requirement_dicts = []
+    
+    # parse the bullet points into "Use" and "Number of Space"
     for requirement in wanted_contents:
         # need to find a way to separate properly
         # might run into the problem of "Single-family dwelling—Two spaces."

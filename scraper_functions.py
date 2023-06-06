@@ -20,11 +20,11 @@ def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chro
        installed in order to execute this function.
 
     Args:
-        url (str): url of the website 
-        driver_path (str): driver path of the Chrome Driver 
+        url: url of the website (str)
+        driver_path: driver path of the Chrome Driver (str)
 
     Return:
-        html (str): HTML of the rendered website
+        html: HTML of the rendered website (str)
     '''
 
     # Create a headless webdriver instance and interact with the website
@@ -49,9 +49,9 @@ def parse_table(html):
     '''Parse the HTML to extract tables.
 
     Arg:
-        html (str): HTML of the rendered website 
+        html: HTML of the rendered website (str)
     Return:
-        tables (list): a list of parsed HTML table  
+        tables: a list of parsed table HTML (list)
     '''
 
     # using BeautifulSoup to parse the HTML and find all the tables
@@ -82,12 +82,11 @@ def read_pdf(pdf_file, page_numbers):
 
 
 def url_text_to_table(url, section_name, separator):
-    '''Parse the html to find all the bullet point parking requiremnets
+    '''Parse the html to and find all the bullet point parking requiremnets
     Args:
         url: url of the webpage
         section_name: the section name that contains the bullet point requirements
-        separator: a separator, usually ":" or ".", that divides the sentence into 
-                   "Use" and "Parking Requirement" 
+        separator: separator of use and parking 
     Return:
         pandas DataFrame
     '''
@@ -96,13 +95,13 @@ def url_text_to_table(url, section_name, separator):
     title = soup.find("div", text = section_name)
     section = title.find_parent("li")
     
-    # finding the "content" class with the biggest number at the end
+    # finding the smallest content
     raw_contents = section.find_all('p', class_ = lambda value: value and value.startswith("content"))
-    content_names = set(' '.join(content['class']) for content in raw_contents)
-    content_nums = []
-    for name in content_names:
-        content_nums.append(int(name[-1]))
-    wanted_class = f"content{max(content_nums)}"
+    uniq_names = set(' '.join(content['class']) for content in raw_contents)
+    uniq_ints = []
+    for name in uniq_names:
+        uniq_ints.append(int(name[-1]))
+    wanted_class = f"content{max(uniq_ints)}"
     wanted_contents = section.find_all('p', class_ = wanted_class)
     requirement_dicts = []
     for requirement in wanted_contents:

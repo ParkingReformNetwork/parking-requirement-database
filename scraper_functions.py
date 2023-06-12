@@ -15,7 +15,7 @@ import os
 
 
 
-def get_html(url, driver_path=r"C:\Users\tungl\Downloads\chromedriver_win32\chromedriver"):
+def get_html(url, driver_path=r"https://github.com/ParkingReformNetwork/parking-requirement-database.git"):
     '''Get the html of a webpage. You need to have a Chrome driver
        installed in order to execute this function.
 

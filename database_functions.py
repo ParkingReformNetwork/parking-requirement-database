@@ -1,21 +1,13 @@
 from typing import Optional
-from sqlalchemy import String
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy import URL
+from sqlalchemy import String, URL, create_engine, select, update, func, table, column
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import Session
 from sqlalchemy import text, Date
-from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import JSONB, insert
-from sqlalchemy import func
-from sqlalchemy import table, column
 import sqlalchemy.pool as pool
 
 import psycopg2
 
-from sqlalchemy import create_engine
 from config import config
 from datetime import date
 

@@ -3,6 +3,7 @@ from scraper_functions import *
 import pandas as pd
 import os
 import sys
+import re
 
 
 def start_interface():
@@ -199,3 +200,19 @@ def rename_headers_to_index(df):
     """
     df.columns = [str(i) for i in range(len(df.columns))]
     return df
+
+
+def remove_beginning_non_alpha(txt):
+    """Removes non-alphabetic characters in a string
+
+    Args:
+        txt: str
+
+    Returns: str
+    """
+    match = re.search(r'[a-zA-Z]', txt)
+    if match:
+        index = match.start()
+        return txt[index:]
+    else:
+        return txt

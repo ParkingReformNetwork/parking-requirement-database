@@ -1,5 +1,5 @@
 from typing import Optional
-from sqlalchemy import String, URL, create_engine, select, update, func, table, column
+from sqlalchemy import String, URL, create_engine, select, update, func, table, column, and_
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, Session
 from sqlalchemy.orm import relationship
 from sqlalchemy import text, Date
@@ -156,6 +156,28 @@ def read_database():
                 query = session.scalars(statement).all()
                 print(f"Total number of entries: {query}")
 
+
+def update_use(orm_list, function):
+    for i in orm_list:
+        i.use = function(i.use)
+
+
+def update_with(state, region, function):
+
+    url_object = URL.create(**config())
+    engine = create_engine(url_object)
+
+    with Session(engine) as session:
+        print("Connecting to database...")
+        existing = session.query(Requirement)\
+            .filter(and_(Requirement.state == state, Requirement.region == region)).all()
+
+        print(f"Found the following existing entries:\n{existing}")
+        update_use(existing, function)
+        session.commit()
+        query = session.query(Requirement) \
+            .filter(and_(Requirement.state == state, Requirement.region == region)).all()
+        print(f"\n\nSuccess. Resulting insertion: {query}")
 
 """
 def insert_region(state, region, url):
